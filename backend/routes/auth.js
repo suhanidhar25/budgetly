@@ -31,30 +31,42 @@ router.post("/signup", async (req, res) => {
 
 // LOGIN
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const [rows] = await db.query(
-    "SELECT * FROM users WHERE email=?",
-    [email]
-  );
+    const [rows] = await db.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
+    );
 
-  if (!rows.length)
-    return res.status(401).json({ message: "User not found" });
+    // user check
+    if (rows.length === 0) {
+      return res.status(401).json({ message: "User not found" });
+    }
 
-  const user = rows[0];
+    const user = rows[0];
 
-  const valid = await bcrypt.compare(password, user.password);
+    // password check
+    const valid = await bcrypt.compare(password, user.password);
 
-  if (!valid)
-    return res.status(401).json({ message: "Invalid password" });
+    if (!valid) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
 
-  const token = jwt.sign(
-    { id: user.id },
-    process.env.JWT_SECRET,
-    { expiresIn: "1d" }
-  );
+    // token
+    const token = jwt.sign(
+      { id: user.id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
 
-  res.json({ token });
+    res.json({ token });
+
+  } catch (err) {
+    console.error("LOGIN ERROR:", err); // ⭐ THIS WILL SHOW REAL ERROR
+    res.status(500).json({ message: "Server error" });
+  }
 });
+
 
 module.exports = router;

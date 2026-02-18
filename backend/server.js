@@ -15,6 +15,13 @@ app.get("/", (req, res) => { res.send("Backend is running ✅"); });
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 
+const db = require("./db");
+
+db.query("SELECT 1")
+  .then(() => console.log("✅ DB CONNECTED"))
+  .catch(err => console.log("❌ DB ERROR:", err));
+
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
