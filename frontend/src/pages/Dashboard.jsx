@@ -13,12 +13,8 @@ export default function Dashboard({
   setRefresh,
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="space-y-8 lg:space-y-10"
-    >
+    <motion.div className="space-y-8">
+
       {/* TITLE */}
       <div>
         <h1 className="text-xl sm:text-2xl font-semibold">
@@ -30,17 +26,17 @@ export default function Dashboard({
       </div>
 
       {/* SUMMARY CARDS */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {/* BALANCE */}
         <div className="dashboard-card text-white p-6">
-          <p className="text-sm text-white/60">Total Balance</p>
-          <h2
-            className={`text-3xl font-bold ${
-              balance < 0 ? "text-red-400" : "text-green-400"
-            }`}
-          >
-            <CountUp end={balance} duration={0.6} separator="," prefix="₹" />
+          <p className="text-sm text-white/60">Balance</p>
+          <h2 className="text-3xl font-bold text-green-400">
+            <CountUp
+              end={balance}
+              duration={0.6}
+              separator=","
+              prefix="₹"
+            />
           </h2>
         </div>
 
@@ -92,6 +88,7 @@ export default function Dashboard({
         </div>
 
       </div>
+
     </motion.div>
   );
 }

@@ -179,3 +179,13 @@ body.light-theme nav a {
     color 0.25s ease,
     border-color 0.25s ease;
 }
+
+/* Prevent horizontal scroll */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Smooth responsive feel */
+* {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
