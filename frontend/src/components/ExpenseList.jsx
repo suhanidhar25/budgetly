@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import API from "../api";
+import { motion, AnimatePresence } from "framer-motion";
 
 function ExpenseList({ refresh }) {
   const [expenses, setExpenses] = useState([]);
@@ -47,55 +48,68 @@ function ExpenseList({ refresh }) {
           </p>
         </div>
       ) : (
-        <div className="space-y-3">
-          {expenses.map((exp) => (
-            <div
-              key={exp.id}
-              role="listitem"
-              className="
-                flex flex-col sm:flex-row
-                sm:items-center
-                justify-between
-                gap-3
-                bg-white
-                rounded-lg
-                px-4 py-3
-                border border-slate-200
-                shadow-sm
-                hover:shadow-md
-                transition
-              "
-            >
-              {/* LEFT */}
-              <div className="font-semibold text-slate-800 wrap-break-word">
-                {exp.title}
-              </div>
 
-              {/* RIGHT */}
-              <div className="flex items-center justify-between sm:justify-end gap-4">
-                <div className="font-bold text-blue-700">
-                  {formatCurrency(exp.amount)}
+        <div className="space-y-3">
+
+          <AnimatePresence>
+            {expenses.map((exp) => (
+
+              <motion.div
+                key={exp.id}
+                role="listitem"
+                initial={{ opacity: 0, y: 40 }}
+animate={{ opacity: 1, y: 0 }}
+exit={{ opacity: 0, x: -80 }}
+transition={{ duration: 0.4, ease: "easeOut" }}
+
+                layout
+                className="
+                  flex flex-col sm:flex-row
+                  sm:items-center
+                  justify-between
+                  gap-3
+                  bg-white
+                  rounded-lg
+                  px-4 py-3
+                  border border-slate-200
+                  shadow-sm
+                  hover:shadow-md
+                  transition
+                "
+              >
+                {/* LEFT */}
+                <div className="font-semibold text-slate-800 wrap-break-word">
+                  {exp.title}
                 </div>
 
-                <button
-                  onClick={() => deleteExpense(exp.id)}
-                  aria-label={`Delete ${exp.title}`}
-                  className="
-                    px-3 py-1.5
-                    rounded-md
-                    text-sm font-semibold
-                    bg-red-500
-                    text-white
-                    hover:bg-red-600
-                    transition
-                  "
-                >
-                  Delete
-                </button>
-              </div>
+                {/* RIGHT */}
+                <div className="flex items-center justify-between sm:justify-end gap-4">
+                  <div className="font-bold text-blue-700">
+                    {formatCurrency(exp.amount)}
+                  </div>
 
-            </div>
-          ))}
+                  <button
+                    onClick={() => deleteExpense(exp.id)}
+                    aria-label={`Delete ${exp.title}`}
+                    className="
+                      px-3 py-1.5
+                      rounded-md
+                      text-sm font-semibold
+                      bg-red-500
+                      text-white
+                      hover:bg-red-600
+                      transition
+                    "
+                  >
+                    Delete
+                  </button>
+                </div>
+
+              </motion.div>
+
+            ))}
+          </AnimatePresence>
+
         </div>
       )}
 

@@ -1,66 +1,181 @@
 @import "tailwindcss";
-/* ===== GLOBAL APP THEME ===== */
-/* ===== Background Glow Effect ===== */
+
+/* =====================================================
+   GLOBAL APP THEME
+===================================================== */
 
 body {
   min-height: 100vh;
   font-family: Inter, system-ui, sans-serif;
 
+  /* DARK MODE (DEFAULT) */
   background: linear-gradient(
     180deg,
     #0b2545 0%,
     #12365f 60%,
     #0b2545 100%
   );
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
-.dashboard-card {
-  border-radius: 1rem; /* rounded-2xl */
-  border: 1px solid rgba(255,255,255,0.1); /* border + border-white/10 */
-  overflow: hidden; /* overflow-hidden */
-  background: rgba(31, 74, 115, 0.92);
-  box-shadow:
-  0 10px 25px rgba(0,0,0,0.25),
-  inset 0 1px 0 rgba(255,255,255,0.06);
+/* =====================================================
+   DASHBOARD CARD
+===================================================== */
 
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.dashboard-card {
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+
+  background: rgba(31, 74, 115, 0.92);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 .dashboard-card:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,0.35);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
 }
 
+/* =====================================================
+   CARD BODY
+===================================================== */
 
 .dashboard-card-body {
-  background-color: #f1f5f9; /* bg-slate-100 */
-  color: #1f2937; /* text-slate-800 */
-  padding: 1.5rem; /* p-6 */
+  background-color: #f1f5f9;
+  color: #1f2937;
+  padding: 1.5rem;
 }
+
+/* =====================================================
+   CARD HEADER
+===================================================== */
 
 .dashboard-card-header {
-  padding-left: 1.5rem; /* px-6 */
-  padding-right: 1.5rem; /* px-6 */
-  padding-top: 1rem; /* py-4 */
-  padding-bottom: 1rem; /* py-4 */
-  font-size: 1.125rem; /* text-lg */
-  font-weight: 600; /* font-semibold */
-  background-color: rgba(255,255,255,0.05); /* bg-white/5 */
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  background-color: rgba(255,255,255,0.05);
 }
 
+/* =====================================================
+   PRIMARY BUTTON
+===================================================== */
+
 .primary-btn {
-  width: 100%; /* w-full */
-  padding-top: 0.75rem; /* py-3 */
-  padding-bottom: 0.75rem; /* py-3 */
-  border-radius: 0.5rem; /* rounded-lg */
-  font-weight: 600; /* font-semibold */
-  color: #ffffff; /* text-white */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* transition */
+  width: 100%;
+  padding: 0.75rem 0;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: #ffffff;
+
   background: linear-gradient(180deg,#1e3a5f,#0b2545);
   box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .primary-btn:hover {
   transform: translateY(-1px);
+}
+
+/* =====================================================
+   LIGHT MODE
+   Activated via: body.light-theme
+===================================================== */
+
+body.light-theme {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* cards */
+body.light-theme .dashboard-card {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* card body */
+body.light-theme .dashboard-card-body {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* navbar */
+body.light-theme nav {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+/* inputs + selects */
+body.light-theme input,
+body.light-theme select {
+  background: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+}
+
+/* buttons */
+body.light-theme .primary-btn {
+  background: linear-gradient(180deg,#2563eb,#1e40af);
+}
+
+/* =====================================================
+   LIGHT MODE TEXT FIXES (IMPORTANT)
+===================================================== */
+
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4 {
+  color: #0f172a;
+}
+
+/* replaces text-white */
+body.light-theme .text-white {
+  color: #0f172a !important;
+}
+
+/* muted text */
+body.light-theme .text-white\/60,
+body.light-theme .text-white\/70 {
+  color: #475569 !important;
+}
+
+/* faded blues */
+body.light-theme .text-blue-200,
+body.light-theme .text-blue-300 {
+  color: #2563eb !important;
+}
+
+/* navbar links */
+body.light-theme nav span,
+body.light-theme nav a {
+  color: #0f172a;
+}
+
+/* =====================================================
+   SMOOTH THEME TRANSITION
+===================================================== */
+
+* {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
 }

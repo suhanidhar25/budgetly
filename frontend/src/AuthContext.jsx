@@ -13,23 +13,24 @@ export function AuthProvider({ children }) {
 
   // Load token when app starts
   useEffect(() => {
-  const savedToken = localStorage.getItem("token");
+  const storedToken = localStorage.getItem("token");
 
-  if (savedToken) {
-    setToken(savedToken);
+  if (storedToken) {
+    setToken(storedToken);
   }
 
-  // always stop loading
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 100);
+  setIsLoading(false); // ✅ VERY IMPORTANT
 }, []);
+
+
+  
 
   // LOGIN ✅
   const login = (token) => {
-    setToken(token);
-    localStorage.setItem("token", token);
-  };
+  localStorage.setItem("token", token);
+  setToken(token);
+};
+
 
   // LOGOUT ✅
   const logout = () => {
