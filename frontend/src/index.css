@@ -12,20 +12,16 @@ body {
     #12365f 60%,
     #0b2545 100%
   );
-
-  
 }
 
 .dashboard-card {
-  @apply rounded-2xl border border-white/10 overflow-hidden;
+  border-radius: 1rem; /* rounded-2xl */
+  border: 1px solid rgba(255,255,255,0.1); /* border + border-white/10 */
+  overflow: hidden; /* overflow-hidden */
   background: rgba(31, 74, 115, 0.92);
-
   box-shadow:
     0 20px 40px rgba(0,0,0,0.35),
     inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-.dashboard-card {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -35,17 +31,30 @@ body {
     0 30px 60px rgba(0,0,0,0.45);
 }
 
-
 .dashboard-card-body {
-  @apply bg-slate-100 text-slate-800 p-6;
+  background-color: #f1f5f9; /* bg-slate-100 */
+  color: #1f2937; /* text-slate-800 */
+  padding: 1.5rem; /* p-6 */
 }
 
 .dashboard-card-header {
-  @apply px-6 py-4 text-lg font-semibold bg-white/5;
+  padding-left: 1.5rem; /* px-6 */
+  padding-right: 1.5rem; /* px-6 */
+  padding-top: 1rem; /* py-4 */
+  padding-bottom: 1rem; /* py-4 */
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600; /* font-semibold */
+  background-color: rgba(255,255,255,0.05); /* bg-white/5 */
 }
 
 .primary-btn {
-  @apply w-full py-3 rounded-lg font-semibold text-white transition;
+  width: 100%; /* w-full */
+  padding-top: 0.75rem; /* py-3 */
+  padding-bottom: 0.75rem; /* py-3 */
+  border-radius: 0.5rem; /* rounded-lg */
+  font-weight: 600; /* font-semibold */
+  color: #ffffff; /* text-white */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* transition */
   background: linear-gradient(180deg,#1e3a5f,#0b2545);
   box-shadow: 0 6px 14px rgba(0,0,0,0.3);
 }
