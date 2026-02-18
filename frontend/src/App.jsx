@@ -37,36 +37,72 @@ function App() {
   /* ===== Dashboard ===== */
   return (
     <MainLayout>
-      <div className="space-y-6">
+  <div className="space-y-6">
 
-        {/* Page Heading */}
-        <div className="text-white">
-          <h1 className="text-2xl font-semibold">
-            Expense Dashboard
-          </h1>
-          <p className="text-white/60 text-sm">
-            Track and manage your spending
-          </p>
+    {/* ===== PAGE TITLE ===== */}
+    <div className="text-white">
+      <h1 className="text-xl sm:text-2xl font-semibold">
+        Expense Dashboard
+      </h1>
+      <p className="text-white/60 text-sm">
+        Track and manage your spending
+      </p>
+    </div>
+
+    {/* ===== SUMMARY CARDS (NEW SECTION) ===== */}
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+      <div className="dashboard-card text-white p-5">
+        <p className="text-sm text-white/60">Total Balance</p>
+        <h2 className="text-2xl font-semibold mt-1">₹12,450</h2>
+      </div>
+
+      <div className="dashboard-card text-white p-5">
+        <p className="text-sm text-white/60">Income</p>
+        <h2 className="text-2xl font-semibold text-green-400 mt-1">
+          + ₹20,000
+        </h2>
+      </div>
+
+      <div className="dashboard-card text-white p-5">
+        <p className="text-sm text-white/60">Expenses</p>
+        <h2 className="text-2xl font-semibold text-red-400 mt-1">
+          − ₹7,550
+        </h2>
+      </div>
+
+    </div>
+
+    {/* ===== MAIN DASHBOARD GRID ===== */}
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      {/* LEFT — FORM */}
+      <div className="lg:col-span-1 dashboard-card">
+        <div className="dashboard-card-header text-white">
+          Add Expense
         </div>
-
-        {/* Responsive Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-          {/* Form Section */}
-          <div className="lg:col-span-1">
-            <ExpenseForm
-              onExpenseAdded={() => setRefresh(!refresh)}
-            />
-          </div>
-
-          {/* List Section */}
-          <div className="lg:col-span-2">
-            <ExpenseList refresh={refresh} />
-          </div>
-
+        <div className="dashboard-card-body">
+          <ExpenseForm
+            onExpenseAdded={() => setRefresh(!refresh)}
+          />
         </div>
       </div>
-    </MainLayout>
+
+      {/* RIGHT — EXPENSE LIST */}
+      <div className="lg:col-span-2 dashboard-card">
+        <div className="dashboard-card-header text-white">
+          Recent Transactions
+        </div>
+        <div className="dashboard-card-body">
+          <ExpenseList refresh={refresh} />
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</MainLayout>
+
   );
 }
 
