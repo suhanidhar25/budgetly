@@ -1,6 +1,7 @@
 @import "tailwindcss";
+
+
 /* ===== GLOBAL APP THEME ===== */
-/* ===== Background Glow Effect ===== */
 
 body {
   min-height: 100vh;
@@ -12,9 +13,9 @@ body {
     #12365f 60%,
     #0b2545 100%
   );
-
-  
 }
+
+/* ===== Dashboard Card ===== */
 
 .dashboard-card {
   @apply rounded-2xl border border-white/10 overflow-hidden;
@@ -23,29 +24,27 @@ body {
   box-shadow:
     0 20px 40px rgba(0,0,0,0.35),
     inset 0 1px 0 rgba(255,255,255,0.05);
-}
 
-.dashboard-card {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .dashboard-card:hover {
   transform: translateY(-6px);
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.45);
-}
-
-
-.dashboard-card-body {
-  @apply bg-slate-100 text-slate-800 p-6;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.45);
 }
 
 .dashboard-card-header {
   @apply px-6 py-4 text-lg font-semibold bg-white/5;
 }
 
+.dashboard-card-body {
+  @apply bg-slate-100 text-slate-800 p-6;
+}
+
+/* ===== Primary Button ===== */
+
 .primary-btn {
-  @apply w-full py-3 rounded-lg font-semibold text-white transition;
+  @apply w-full py-3 rounded-lg font-semibold text-white transition-all duration-200;
   background: linear-gradient(180deg,#1e3a5f,#0b2545);
   box-shadow: 0 6px 14px rgba(0,0,0,0.3);
 }
