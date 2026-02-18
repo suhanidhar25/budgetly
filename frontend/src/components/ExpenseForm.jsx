@@ -11,6 +11,7 @@ function ExpenseForm({ onExpenseAdded }) {
 
     try {
       const numericAmount = parseFloat(amount);
+
       if (Number.isNaN(numericAmount) || numericAmount <= 0) {
         alert("Please enter a valid positive amount");
         return;
@@ -35,15 +36,7 @@ function ExpenseForm({ onExpenseAdded }) {
   };
 
   return (
-  <div className="dashboard-card" aria-live="polite">
-
-    {/* Card Header */}
-    <div className="dashboard-card-header">
-      Add New Expense
-    </div>
-
-    {/* Card Body */}
-    <div className="dashboard-card-body">
+    <div aria-live="polite" className="w-full">
 
       <form onSubmit={handleSubmit}>
         <div className="space-y-4">
@@ -102,11 +95,12 @@ function ExpenseForm({ onExpenseAdded }) {
                 focus:outline-none
                 focus:ring-2 focus:ring-blue-400
                 focus:border-blue-400
+                text-slate-800
               "
             />
           </div>
 
-          {/* Button */}
+          {/* Submit Button */}
           <button
             type="submit"
             className="
@@ -115,7 +109,7 @@ function ExpenseForm({ onExpenseAdded }) {
               rounded-lg
               font-semibold
               text-white
-              transition
+              transition-all duration-200
               bg-[#0b2545]
               hover:bg-[#081a30]
               active:scale-[0.98]
@@ -134,7 +128,7 @@ function ExpenseForm({ onExpenseAdded }) {
       </div>
 
     </div>
-  </div>
-);
+  );
 }
+
 export default ExpenseForm;
