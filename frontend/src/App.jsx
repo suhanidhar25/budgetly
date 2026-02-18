@@ -37,7 +37,8 @@ function App() {
   /* ===== Dashboard ===== */
   return (
     <MainLayout>
-  <div className="space-y-6">
+  <div className="space-y-8 lg:space-y-10">
+
 
     {/* ===== PAGE TITLE ===== */}
     <div className="text-white">
@@ -52,9 +53,9 @@ function App() {
     {/* ===== SUMMARY CARDS (NEW SECTION) ===== */}
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-      <div className="dashboard-card text-white p-5">
+      <div className="dashboard-card text-white p-6 lg:p-7">
         <p className="text-sm text-white/60">Total Balance</p>
-        <h2 className="text-2xl font-semibold mt-1">₹12,450</h2>
+        <h2 className="text-3xl font-bold mt-1">₹12,450</h2>
       </div>
 
       <div className="dashboard-card text-white p-5">
@@ -74,7 +75,8 @@ function App() {
     </div>
 
     {/* ===== MAIN DASHBOARD GRID ===== */}
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+
 
       {/* LEFT — FORM */}
       <div className="lg:col-span-1 dashboard-card">

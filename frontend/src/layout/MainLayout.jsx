@@ -30,7 +30,8 @@ export default function MainLayout({ children }) {
       </nav>
 
       {/* ================= MAIN CONTENT ================= */}
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1">
+      <main className="w-full max-w-[1200px]
+ mx-auto px-4 sm:px-6 lg:px-8 flex-1">
 
         {/* HERO MOVED INSIDE CONTAINER ✅ */}
         <div className="text-center mt-10 mb-10">
