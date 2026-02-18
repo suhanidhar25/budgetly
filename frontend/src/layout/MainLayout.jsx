@@ -53,10 +53,10 @@ export default function MainLayout({ children, onLogout }) {
       </header>
 
       {/* ================= MAIN CONTENT ================= */}
-      <main className="w-full max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+     <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  {children}
+</main>
 
-        {children}
-      </main>
 
       {/* ================= FOOTER ================= */}
       <footer className="text-center text-blue-300 text-sm py-8">
