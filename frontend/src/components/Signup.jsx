@@ -23,121 +23,137 @@ function Signup({ goToLogin }) {
   };
 
   return (
-  <div className="min-h-screen flex items-center justify-center px-4">
+    <div>
+      {/* MAIN FINTECH CONTAINER */}
+      <form
+        onSubmit={handleSignup}
+        className="
+          w-full
+          max-w-6xl
+          grid
+          lg:grid-cols-2
+          rounded-2xl
+          overflow-hidden
+          shadow-2xl
+          bg-white/95
+          backdrop-blur
+        "
+      >
+        {/* ================= LEFT BRAND PANEL ================= */}
+        <div className="hidden lg:flex flex-col justify-center p-12 bg-linear-to-br from-emerald-700 to-emerald-900 text-white">
+          <h1 className="text-4xl font-serif font-semibold mb-6">Budgetly</h1>
 
-    {/* Auth Card */}
-    <form
-      onSubmit={handleSignup}
-      className="
-        w-full max-w-md
-        rounded-2xl
-        border border-white/10
-        bg-[#1f4a73]/90
-        shadow-2xl
-        backdrop-blur
-        overflow-hidden
-      "
-    >
-      {/* Header */}
-      <div className="px-8 py-6 text-center bg-white/5">
-        <div className="w-12 h-12 mx-auto mb-4 bg-white/10 text-white rounded-lg flex items-center justify-center font-bold">
-          ET
+          <p className="text-emerald-100 text-lg leading-relaxed max-w-md">
+            Take control of your finances with smart expense tracking, real-time
+            insights, and powerful budgeting tools.
+          </p>
+
+          <div className="mt-10 space-y-3 text-emerald-200 text-sm">
+            <p>✓ Track expenses effortlessly</p>
+            <p>✓ Smart analytics dashboard</p>
+            <p>✓ Secure cloud sync</p>
+          </div>
         </div>
 
-        <h2 className="text-2xl font-semibold text-white">
-          Create Account
-        </h2>
+        {/* ================= RIGHT FORM PANEL ================= */}
+        <div className="p-8 md:p-12 flex flex-col justify-center">
+          {/* Header */}
+          <div className="mb-8 text-center lg:text-left">
+            <h2 className="text-3xl md:text-4xl font-semibold text-slate-800">
+              Create your account
+            </h2>
 
-        <p className="text-sm text-blue-200 mt-1">
-          Start tracking your expenses today
-        </p>
-      </div>
+            <p className="text-slate-500 mt-2">
+              Start tracking your expenses today
+            </p>
+          </div>
 
-      {/* Body */}
-      <div className="bg-slate-100 text-slate-800 p-8">
+          {/* Email */}
+          <div className="mb-5">
+            <label className="block text-sm font-medium mb-1 text-slate-700">
+              Email
+            </label>
 
-        {/* Email */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-1">
-            Email
-          </label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="
+                w-full
+                px-4 py-3
+                rounded-lg
+                border
+                border-slate-300
+                focus:outline-none
+                focus:ring-2
+                focus:ring-emerald-600
+                transition
+              "
+            />
+          </div>
 
-          <input
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="
-              w-full px-4 py-2.5
-              rounded-lg
-              border border-slate-300
-              focus:outline-none
-              focus:ring-2 focus:ring-blue-400
-              focus:border-blue-400
-            "
-          />
-        </div>
+          {/* Password */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium mb-1 text-slate-700">
+              Password
+            </label>
 
-        {/* Password */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium mb-1">
-            Password
-          </label>
+            <input
+              type="password"
+              placeholder="Create a password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="
+                w-full
+                px-4 py-3
+                rounded-lg
+                border
+                border-slate-300
+                focus:outline-none
+                focus:ring-2
+                focus:ring-emerald-600
+                transition
+              "
+            />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Create a password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="
-              w-full px-4 py-2.5
-              rounded-lg
-              border border-slate-300
-              focus:outline-none
-              focus:ring-2 focus:ring-blue-400
-              focus:border-blue-400
-            "
-          />
-        </div>
-
-        {/* Button */}
-        <button
-          type="submit"
-          className="
-            w-full
-            py-3
-            rounded-lg
-            font-semibold
-            text-white
-            bg-[#0b2545]
-            hover:bg-[#081a30]
-            transition
-            shadow-md
-            active:scale-[0.98]
-          "
-        >
-          Create Account
-        </button>
-
-        {/* Login Link */}
-        <p className="text-sm text-center text-slate-600 mt-6">
-          Already have an account?{" "}
+          {/* Submit */}
           <button
-            type="button"
-            onClick={goToLogin}
-            className="text-blue-600 font-semibold hover:underline"
+            type="submit"
+            className="
+              w-full
+              bg-emerald-700
+              hover:bg-emerald-800
+              text-white
+              font-semibold
+              py-3
+              rounded-lg
+              transition
+              shadow-md
+              hover:shadow-lg
+            "
           >
-            Login
+            Create Account
           </button>
-        </p>
-      </div>
 
-    </form>
-  </div>
-);
-
+          {/* Login Link */}
+          <p className="text-sm text-center text-slate-600 mt-8">
+            Already have an account?{" "}
+            <button
+              type="button"
+              onClick={goToLogin}
+              className="text-emerald-700 font-semibold hover:underline"
+            >
+              Login
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+  );
 }
 
 export default Signup;

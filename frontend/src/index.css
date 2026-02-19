@@ -79,8 +79,8 @@ body {
   border-radius: 0.5rem;
   font-weight: 600;
   color: #ffffff;
-
-  background: linear-gradient(180deg,#1e3a5f,#0b2545);
+  /* green primary to match mock */
+  background: linear-gradient(180deg,#166534,#14532d);
   box-shadow: 0 6px 14px rgba(0,0,0,0.3);
 
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -132,7 +132,7 @@ body.light-theme select {
 
 /* buttons */
 body.light-theme .primary-btn {
-  background: linear-gradient(180deg,#2563eb,#1e40af);
+  background: linear-gradient(180deg,#16a34a,#15803d);
 }
 
 /* =====================================================
