@@ -1,15 +1,20 @@
 import React, { useState, useContext } from "react";
 import API from "../api";
 import { AuthContext } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Login({ goToSignup }) {
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setErrorMsg("");
 
     try {
       const res = await API.post("/auth/login", {
@@ -18,9 +23,14 @@ function Login({ goToSignup }) {
       });
 
       login(res.data.token);
-      alert("Login successful!");
+      navigate("/", { replace: true });
     } catch (err) {
-      alert("Login failed");
+      // Show inline message for wrong password only when server responds 401
+      if (err?.response?.status === 401) {
+        setErrorMsg("Password wrong");
+      } else {
+        setErrorMsg("Login failed. Please try again.");
+      }
     }
   };
 
@@ -100,24 +110,38 @@ function Login({ goToSignup }) {
               Password
             </label>
 
-            <input
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="
-                w-full
-                px-4 py-3
-                rounded-lg
-                border
-                border-slate-300
-                focus:outline-none
-                focus:ring-2
-                focus:ring-emerald-600
-                transition
-              "
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="
+                  w-full
+                  px-4 py-3
+                  rounded-lg
+                  border
+                  border-slate-300
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-emerald-600
+                  transition
+                "
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword((s) => !s)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-slate-600 hover:text-slate-800"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+
+            {errorMsg && (
+              <p className="text-sm text-red-600 mt-2">{errorMsg}</p>
+            )}
           </div>
 
           {/* Login Button */}

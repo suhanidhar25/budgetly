@@ -4,9 +4,12 @@ import API from "../api";
 function Signup({ goToLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setErrorMsg("");
 
     try {
       await API.post("/auth/signup", {
@@ -14,10 +17,10 @@ function Signup({ goToLogin }) {
         password,
       });
 
-      alert("Signup successful! Please login.");
+      // silently switch to login view after successful signup
       goToLogin();
     } catch (err) {
-      alert("Signup failed");
+      setErrorMsg("Signup failed. Please try again.");
       console.error(err);
     }
   };
@@ -100,24 +103,38 @@ function Signup({ goToLogin }) {
               Password
             </label>
 
-            <input
-              type="password"
-              placeholder="Create a password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="
-                w-full
-                px-4 py-3
-                rounded-lg
-                border
-                border-slate-300
-                focus:outline-none
-                focus:ring-2
-                focus:ring-emerald-600
-                transition
-              "
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Create a password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="
+                  w-full
+                  px-4 py-3
+                  rounded-lg
+                  border
+                  border-slate-300
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-emerald-600
+                  transition
+                "
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword((s) => !s)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-slate-600 hover:text-slate-800"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+
+            {errorMsg && (
+              <p className="text-sm text-red-600 mt-2">{errorMsg}</p>
+            )}
           </div>
 
           {/* Submit */}
