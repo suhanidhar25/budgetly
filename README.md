@@ -1,155 +1,157 @@
-# 💳 Budgetly — Expense Tracker App
+# Budgetly 💸
 
-Budgetly is a modern **full-stack expense tracking web application** that helps users manage daily spending, monitor financial balance, and gain insights into their expenses through a clean and responsive dashboard.
-
-Built using the **MERN-style architecture** with React + Tailwind CSS on the frontend and Node.js + MySQL backend APIs.
-
----
-
-## 🚀 Live Demo
-
-🌐 https://budgetly-sigma.vercel.app
+A full-stack expense tracking web application built with **React, Node.js, Express, and MySQL**.
+It helps users securely manage expenses, monitor spending habits, and view financial insights through a clean dashboard.
 
 ---
 
-## ✨ Features
+## 🚀 Features
 
-✅ Secure Authentication (Login / Signup)  
-✅ Add & Delete Expenses  
-✅ Dynamic Balance Calculation  
-✅ Income Tracking  
-✅ Responsive Dashboard UI  
-✅ Light & Dark Mode Toggle  
-✅ Animated UI (Framer Motion + CountUp)  
-✅ Persistent User Settings  
-✅ SPA Routing with React Router  
-✅ Fully Responsive (Mobile → Desktop)
+* 🔐 JWT-based Authentication (Signup/Login)
+* 💾 MySQL persistent storage
+* ➕ Add and manage expenses
+* 📊 Dashboard with analytics-ready UI
+* 🔒 Protected API routes with middleware
+* 🌐 Axios API layer with token interceptor
+* 📱 Responsive fintech-style UI
 
 ---
 
-## 🧠 Tech Stack
+## 🛠️ Tech Stack
 
 ### Frontend
-- React (Vite)
-- Tailwind CSS
-- React Router DOM
-- Axios
-- Framer Motion
-- React CountUp
+
+* React + Vite
+* Tailwind CSS
+* Axios
+* React Router
 
 ### Backend
-- Node.js
-- Express.js
-- MySQL
-- JWT Authentication
 
-### Deployment
-- Frontend → Vercel
-- Backend → Render
-
----
-
-## 📸 Screenshots
-
-### Dashboard
-- Expense summary cards
-- Live balance calculation
-- Animated counters
-
-### Settings
-- Profile management
-- Theme switching
+* Node.js
+* Express.js
+* MySQL (`mysql2`)
+* JWT
+* bcryptjs
+* dotenv
 
 ---
 
-## ⚙️ Installation (Run Locally)
-
-### 1️⃣ Clone Repository
+## 📂 Project Structure
 
 ```bash
-git clone https://github.com/suhanidhar25/budgetly.git
-cd budgetly
+budgetly/
+├── backend/
+│   ├── middleware/
+│   ├── routes/
+│   ├── db.js
+│   └── server.js
+└── frontend/
+    ├── src/components/
+    ├── src/pages/
+    ├── src/api.js
+    └── src/AuthContext.jsx
+```
 
-2️⃣ Frontend Setup
+---
+
+## ⚙️ Local Setup
+
+### 1) Clone repo
+
+```bash
+git clone <your-repo-link>
+cd budgetly
+```
+
+### 2) Backend setup
+
+```bash
+cd backend
+npm install
+```
+
+Create `.env` using `.env.example`
+
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=budgetly
+DB_PORT=3306
+JWT_SECRET=your_secret
+PORT=5000
+```
+
+Run backend:
+
+```bash
+node server.js
+```
+
+### 3) Frontend setup
+
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
-Create .env inside frontend:
+Create `.env`:
 
+```env
 VITE_API_URL=http://localhost:5000/api
+```
 
-3️⃣ Backend Setup
-cd backend
-npm install
-npm start
+---
 
+## 🗄️ Database Setup
 
-Create .env:
+Create a MySQL database named:
 
-PORT=5000
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=yourpassword
-DB_NAME=budgetly
-JWT_SECRET=your_secret
+```sql
+CREATE DATABASE budgetly;
+```
 
-budgetly/
-│
-├── frontend/
-│   ├── components/
-│   ├── layout/
-│   ├── pages/
-│   ├── api.js
-│   └── App.jsx
-│
-├── backend/
-│   ├── routes/
-│   ├── middleware/
-│   ├── db.js
-│   └── server.js
+Create tables:
 
+```sql
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-🔐 Environment Variables
-Frontend
-VITE_API_URL=
-Backend
-PORT=
-DB_HOST=
-DB_USER=
-DB_PASSWORD=
-DB_NAME=
-JWT_SECRET=
-📱 Responsive Design
-Budgetly is optimized for:
+CREATE TABLE expenses (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  title VARCHAR(100),
+  amount DECIMAL(10,2),
+  category VARCHAR(100),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+```
 
-📱 Mobile devices
+---
 
-📲 Tablets
+## 🎯 Why This Project
 
-💻 Laptops
+This project demonstrates:
 
-🖥️ Large screens
+* full-stack CRUD architecture
+* secure authentication flow
+* protected REST APIs
+* MySQL integration with connection pooling
+* clean frontend state + API management
+* production-style folder structure
 
-🧩 Future Improvements
-📊 Analytics & Charts
+---
 
-Expense Categories
+## 👩‍💻 Author
 
-Monthly Reports
+**Suhani Dhar**
 
-Notifications
-
-Export to CSV/PDF
-
-Budget Goals Tracking
-
-👩‍💻 Author
-Suhani Dhar
-
-GitHub: https://github.com/suhanidhar25
-
-⭐ If you like this project
-Give it a ⭐ on GitHub — it helps a lot!
-
-
+Built as part of internship-ready MERN/full-stack portfolio projects.
