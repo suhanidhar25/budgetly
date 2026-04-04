@@ -20,7 +20,7 @@ export default function Analytics({ expenses }) {
     if (t.includes("uber") || t.includes("taxi") || t.includes("bus"))
       return "Transport";
 
-    if (t.includes("shop") || t.includes("amazon"))
+    if (t.includes("shop") || t.includes("amazon") || t.includes("online shopping"))
       return "Shopping";
 
     if (t.includes("bill") || t.includes("electric") || t.includes("rent"))

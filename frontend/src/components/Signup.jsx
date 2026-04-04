@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import API from "../api";
 
 function Signup({ goToLogin }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +14,7 @@ function Signup({ goToLogin }) {
 
     try {
       await API.post("/auth/signup", {
+        name,
         email,
         password,
       });
@@ -70,6 +72,31 @@ function Signup({ goToLogin }) {
               Start tracking your expenses today
             </p>
           </div>
+
+          <div className="mb-5">
+  <label className="block text-sm font-medium mb-1 text-slate-700">
+    Full Name
+  </label>
+
+  <input
+    type="text"
+    placeholder="Enter your name"
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    required
+    className="
+      w-full
+      px-4 py-3
+      rounded-lg
+      border
+      border-slate-300
+      focus:outline-none
+      focus:ring-2
+      focus:ring-emerald-600
+      transition
+    "
+  />
+</div>
 
           {/* Email */}
           <div className="mb-5">

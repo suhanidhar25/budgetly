@@ -17,21 +17,26 @@ function Login({ goToSignup }) {
     setErrorMsg("");
 
     try {
-      const res = await API.post("/auth/login", {
-        email,
-        password,
-      });
+  const res = await API.post("/auth/login", {
+    email,
+    password,
+  });
 
-      login(res.data.token);
-      navigate("/", { replace: true });
-    } catch (err) {
-      // Show inline message for wrong password only when server responds 401
-      if (err?.response?.status === 401) {
-        setErrorMsg("Password wrong");
-      } else {
-        setErrorMsg("Login failed. Please try again.");
-      }
-    }
+  // ✅ save auth safely
+  localStorage.setItem("token", res.data.token);
+  localStorage.setItem("user", JSON.stringify(res.data.user));
+
+  login(res.data.token);
+
+  // ✅ redirect dashboard/home
+  navigate("/", { replace: true });
+} catch (err) {
+  if (err?.response?.status === 401) {
+    setErrorMsg("Password wrong");
+  } else {
+    setErrorMsg("Login failed. Please try again.");
+  }
+}
   };
 
   return (
