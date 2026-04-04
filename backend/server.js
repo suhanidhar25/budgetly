@@ -4,34 +4,36 @@ require("dotenv").config();
 
 const authRoutes = require("./routes/auth");
 const expenseRoutes = require("./routes/expenses");
+const db = require("./db");
 
 const app = express();
 
+// ✅ CORS only once
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://budgetly-sigma.vercel.app"
+      "https://budgetly-sigma.vercel.app",
     ],
     credentials: true,
   })
 );
 
-
-app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => { res.send("Backend is running ✅"); });
+// ✅ health route
+app.get("/", (req, res) => {
+  res.send("Backend is running ✅");
+});
 
+// ✅ routes
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 
-const db = require("./db");
-
+// ✅ DB test
 db.query("SELECT 1")
   .then(() => console.log("✅ DB CONNECTED"))
-  .catch(err => console.log("❌ DB ERROR:", err));
-
+  .catch((err) => console.log("❌ DB ERROR:", err));
 
 const PORT = process.env.PORT || 5000;
 

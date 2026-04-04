@@ -1,39 +1,33 @@
 const express = require("express");
+const router = express.Router();
 const db = require("../db");
 const authMiddleware = require("../middleware/authMiddleware");
 
-const router = express.Router();
-
-// GET expenses
 router.get("/", authMiddleware, async (req, res) => {
-  const [rows] = await db.query(
-    "SELECT * FROM expenses WHERE user_id=? ORDER BY created_at DESC",
-    [req.user.id]
-  );
-
-  res.json(rows);
+  try {
+    const [expenses] = await db.query(
+      "SELECT * FROM expenses WHERE user_id = ? ORDER BY created_at DESC",
+      [req.user.id]
+    );
+    res.json(expenses);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-// ADD expense
 router.post("/", authMiddleware, async (req, res) => {
-  const { title, amount } = req.body;
+  try {
+    const { title, amount, category } = req.body;
 
-  await db.query(
-    "INSERT INTO expenses (user_id, title, amount) VALUES (?, ?, ?)",
-    [req.user.id, title, amount]
-  );
+    await db.query(
+      "INSERT INTO expenses (user_id, title, amount, category) VALUES (?, ?, ?, ?)",
+      [req.user.id, title, amount, category]
+    );
 
-  res.json({ message: "Expense added" });
-});
-
-// DELETE expense
-router.delete("/:id", authMiddleware, async (req, res) => {
-  await db.query(
-    "DELETE FROM expenses WHERE id=? AND user_id=?",
-    [req.params.id, req.user.id]
-  );
-
-  res.json({ message: "Expense deleted" });
+    res.json({ message: "Expense added successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 module.exports = router;
