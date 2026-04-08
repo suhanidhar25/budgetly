@@ -16,6 +16,7 @@ app.use(
       "https://budgetly-sigma.vercel.app",
     ],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
